@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en-US" class="no-js" itemtype="https://schema.org/Blog" itemscope>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+    <title>Our Blog - PRAJNA Informatics | Pearl Red & Gold Identity</title>
+    <meta name="description" content="Latest updates, tutorials, and insights from PRAJNA Informatics. Learn software development, programming, and technology trends.">
+    <link rel="canonical" href="https://thesli.in/?page_id=2180" />
+    
+    <!-- Google Fonts + Font Awesome + Tailwind -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #FFFFFF;
+            overflow-x: hidden;
+            color: #1F2937;
+        }
+
+        /* Pearl Red + Golden Yellow theme */
+        :root {
+            --pearl-red: #D92B2B;
+            --pearl-red-dark: #A51C1C;
+            --golden: #F5A623;
+            --golden-dark: #D48A1A;
+            --gray-soft: #F9F9F9;
+        }
+
+        /* header glassmorphism with gold-red borders */
+        .site-header-premium {
+            background: rgba(255, 255, 255, 0.96);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(245, 166, 35, 0.4);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+        }
+
+        /* HOVER REVEAL FOR TOP HEADER */
+        .top-header-reveal {
+            max-height: 0;
+            opacity: 0;
+            visibility: hidden;
+            overflow: hidden;
+            border-bottom: none;
+            transition: max-height 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1),
+                opacity 0.3s ease,
+                visibility 0.3s ease,
+                padding 0.3s ease,
+                border-width 0.2s ease;
+            transform: translateY(-8px);
+        }
+
+        .navbar-hover-wrapper:hover .top-header-reveal,
+        .site-header-premium:hover .top-header-reveal {
+            max-height: 80px;
+            opacity: 1;
+            visibility: visible;
+            border-bottom-width: 1px;
+            transform: translateY(0);
+            padding-top: 0.25rem;
+            padding-bottom: 0.25rem;
+        }
+
+        .main-header-bar {
+            transition: all 0.2s ease;
+            background: rgba(255, 255, 255, 0.98);
+        }
+
+        /* custom dropdown */
+        .nav-dropdown-courses {
+            position: relative;
+        }
+
+        .dropdown-menu-courses {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            min-width: 240px;
+            background: #FFFFFF;
+            backdrop-filter: blur(0);
+            border-radius: 20px;
+            border: 1px solid rgba(245, 166, 35, 0.4);
+            box-shadow: 0 25px 35px -12px rgba(0, 0, 0, 0.12);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(12px);
+            transition: all 0.2s ease;
+            z-index: 200;
+        }
+
+        .nav-dropdown-courses:hover .dropdown-menu-courses {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-item-custom {
+            display: block;
+            padding: 0.7rem 1.5rem;
+            color: #2C3E50;
+            font-weight: 500;
+            font-size: 0.85rem;
+            transition: all 0.2s;
+            border-bottom: 1px solid #FEF3C7;
+        }
+
+        .dropdown-item-custom:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-item-custom:hover {
+            background: #FEF3C7;
+            color: var(--pearl-red);
+            padding-left: 1.8rem;
+        }
+
+        .btn-gold-outline {
+            border: 1.5px solid var(--golden);
+            background: transparent;
+            transition: 0.2s;
+        }
+
+        .btn-gold-outline:hover {
+            background: var(--golden);
+            color: #1E1B1B;
+            border-color: var(--golden);
+        }
+
+        .btn-red-solid {
+            background: linear-gradient(105deg, #D92B2B, #B91C1C);
+            box-shadow: 0 8px 18px rgba(217, 43, 43, 0.2);
+        }
+
+        .btn-red-solid:hover {
+            background: linear-gradient(105deg, #B91C1C, #991B1B);
+            transform: scale(1.02);
+        }
+
+        .gradient-text-red-gold {
+            background: linear-gradient(135deg, #D92B2B 0%, #F5A623 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #F3F4F6;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--pearl-red);
+            border-radius: 10px;
+        }
+
+        @media (max-width: 1024px) {
+            .top-header-reveal {
+                display: none !important;
+            }
+            .navbar-hover-wrapper:hover .top-header-reveal {
+                display: none !important;
+            }
+        }
+
+        /* Blog Card Styles */
+        .blog-card {
+            background: #FFFFFF;
+            border: 1px solid rgba(245, 166, 35, 0.2);
+            border-radius: 1.5rem;
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(217, 43, 43, 0.3);
+            box-shadow: 0 20px 30px -12px rgba(217, 43, 43, 0.15);
+        }
+
+        .blog-thumbnail {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .blog-card:hover .blog-thumbnail {
+            transform: scale(1.05);
+        }
+
+        .pagination .page-numbers {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            margin: 0 4px;
+            border-radius: 50%;
+            background: white;
+            border: 1px solid rgba(245, 166, 35, 0.3);
+            color: #4B5563;
+            transition: all 0.2s ease;
+        }
+
+        .pagination .page-numbers.current {
+            background: linear-gradient(135deg, #D92B2B, #B91C1C);
+            border-color: #D92B2B;
+            color: white;
+        }
+
+        .pagination .page-numbers:hover:not(.current) {
+            border-color: #D92B2B;
+            color: #D92B2B;
+        }
+    </style>
+</head>
+
+<body class="bg-gradient-to-r from-[#BF953F]/20 via-[#FCF6BA]/20 to-[#B38728]/20 min-h-screen">
+
+    <!-- =================== MASTHEAD : PEARL RED & GOLD HEADER =================== -->
+    <div class="navbar-hover-wrapper">
+        <header id="masthead" class="site-header-premium fixed top-0 w-full z-50 transition-all duration-200" role="banner">
+
+            <!-- TOP HEADER - HIDDEN INITIALLY -->
+            <div class="top-header-reveal bg-white/95 backdrop-blur-sm border-b border-[#F5A623]/20 transition-all duration-300">
+                <div class="max-w-7xl mx-auto px-6 py-1.5 flex items-center justify-between">
+                    <div class="flex items-center gap-6">
+                        <div class="flex gap-3 text-gray-600">
+                            <a href="https://www.facebook.com/profile.php?id=100083228295300" target="_blank" aria-label="Facebook" class="hover:text-[#D92B2B] transition text-lg"><i class="fab fa-facebook-f"></i></a>
+                            <a href="https://twitter.com/stheetaprajna" target="_blank" aria-label="X" class="hover:text-[#D92B2B] transition text-lg"><i class="fab fa-twitter"></i></a>
+                            <a href="https://www.instagram.com/stheetaprajna_learningidea/" target="_blank" aria-label="Instagram" class="hover:text-[#D92B2B] transition text-lg"><i class="fab fa-instagram"></i></a>
+                        </div>
+                        <div class="h-5 w-px bg-gray-300"></div>
+                        <img src="https://thesli.in/wp-content/uploads/2025/10/Logo.png" class="h-8 w-auto" alt="SLI Logo">
+                    </div>
+                    <nav class="secondary-nav" aria-label="Secondary">
+                        <ul class="flex gap-6 text-sm font-medium text-gray-700">
+                            <li><a href="about.html" class="hover:text-[#D92B2B] transition">About</a></li>
+                            <li><a href="#" class="hover:text-[#D92B2B] transition">AI@IIT</a></li>
+                            <li><a href="#" class="hover:text-[#D92B2B] transition">Career Opportunity</a></li>
+                            <li><a href="#" class="hover:text-[#D92B2B] transition">Cart</a></li>
+                            <li><a href="#" class="hover:text-[#D92B2B] transition">Checkout</a></li>
+                        </ul>
+                    </nav>
+                    <button class="search-toggle text-gray-600 hover:text-[#D92B2B] transition" aria-label="Search">
+                        <i class="fa-solid fa-magnifying-glass text-sm"></i> <span class="text-sm font-medium ml-1 hidden md:inline">Search</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- MAIN HEADER -->
+            <div class="main-header-bar bg-gradient-to-r from-[#7A0010] via-[#D4AF37] to-[#9E0018] mx-auto px-5 py-3 flex items-center justify-between">
+                <div class="site-branding flex items-center gap-3">
+                    <a class="brand flex items-center" href="index.html">
+                        <img width="180" height="60" src="Prajna Inofrmatics.png" class="custom-logo h-10 w-auto"
+                            alt="PRAJNA Informatics" decoding="async"
+                            onerror="this.onerror=null; this.src='https://placehold.co/180x60?text=PRAJNA+Informatics';">
+                    </a>
+                    <span class="hidden md:inline-block text-lg font-medium bg-[#FEF3C7] text-[#D92B2B] px-2 py-0.5 rounded-full">PRAJNA Informatics</span>
+                </div>
+
+                <nav id="site-navigation" class="hidden lg:block" aria-label="Primary">
+                    <ul class="flex gap-7 text-[15px] font-semibold text-white">
+                        <li><a href="index.html" class="hover:text-[#D92B2B] transition">Home</a></li>
+                        <li class="nav-dropdown-courses relative">
+                            <a href="#" class="flex items-center gap-1 hover:text-[#D92B2B] transition">Courses <i class="fa-solid fa-chevron-down text-[10px]"></i></a>
+                            <ul class="dropdown-menu-courses absolute left-0 top-full mt-1 shadow-xl">
+                                <li><a href="#" class="dropdown-item-custom">📘 Courses List</a></li>
+                                <li><a href="#" class="dropdown-item-custom">⚡ Live Workshops</a></li>
+                                <li><a href="#" class="dropdown-item-custom">👨‍🏫 Instructor Registration</a></li>
+                                <li><a href="#" class="dropdown-item-custom">🎓 Student Registration</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="about.html" class="hover:text-[#D92B2B] transition">About</a></li>
+                        <li><a href="helpdesk.html" class="hover:text-[#D92B2B] transition">Help Desk</a></li>
+                        <li><a href="blog.html" class="text-[#F5A623] border-b-2 border-[#F5A623] transition">Blog</a></li>
+                        <li><a href="contact.html" class="hover:text-[#D92B2B] transition">Contact</a></li>
+                    </ul>
+                </nav>
+
+                <div class="flex lg:hidden items-center gap-4">
+                    <button class="search-toggle-mobile text-gray-700 hover:text-[#D92B2B]"><i class="fa-solid fa-magnifying-glass text-base"></i></button>
+                    <button id="mobileMenuTrigger" class="text-2xl text-gray-700 focus:outline-none"><i class="fa-solid fa-bars"></i></button>
+                </div>
+
+                <div class="hidden lg:flex items-center gap-4">
+                    <a href="https://forms.gle/9SMX5z9DLvusnr1GA" target="_blank" class="px-4 py-2 rounded-full text-sm font-semibold btn-red-solid text-white shadow-sm">Join Free</a>
+                </div>
+            </div>
+
+            <!-- Mobile Drawer -->
+            <div id="mobileDrawer" class="fixed inset-0 bg-white z-50 transform translate-x-full transition-transform duration-300 ease-in-out lg:hidden"
+                style="box-shadow: -5px 0 30px rgba(0,0,0,0.1);">
+                <div class="flex justify-between items-center p-5 border-b border-[#F5A623]/30">
+                    <img src="https://i0.wp.com/thesli.in/wp-content/uploads/2022/07/cropped-cropped-sli-right-align.png?fit=563%2C189&ssl=1" class="h-8 w-auto" alt="logo">
+                    <button id="closeDrawer" class="text-2xl text-gray-600"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+                <div class="p-6 overflow-y-auto h-full pb-32">
+                    <ul class="flex flex-col gap-5 text-lg font-semibold">
+                        <li><a href="index.html" class="block py-2 border-b border-gray-100">Home</a></li>
+                        <li><a href="#" class="block py-2 border-b border-gray-100">Courses</a></li>
+                        <li><a href="about.html" class="block py-2 border-b border-gray-100">About</a></li>
+                        <li><a href="helpdesk.html" class="block py-2 border-b border-gray-100">Help Desk</a></li>
+                        <li><a href="blog.html" class="block py-2 border-b border-gray-100 text-[#D92B2B]">Blog</a></li>
+                        <li><a href="contact.html" class="block py-2 border-b border-gray-100">Contact</a></li>
+                    </ul>
+                    <div class="mt-8 pt-4 border-t border-gray-200 flex flex-col gap-4">
+                        <div class="flex gap-5 text-gray-600 text-xl">
+                            <a href="https://www.facebook.com/profile.php?id=100083228295300" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                            <a href="https://twitter.com/stheetaprajna" target="_blank"><i class="fab fa-twitter"></i></a>
+                            <a href="https://www.instagram.com/stheetaprajna_learningidea/" target="_blank"><i class="fab fa-instagram"></i></a>
+                            <a href="https://www.linkedin.com/in/stheetaprajna-pati-253978223" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                        <a href="https://forms.gle/9SMX5z9DLvusnr1GA" target="_blank" class="btn-red-solid text-center text-white py-2 rounded-full text-sm">Join Free →</a>
+                    </div>
+                </div>
+            </div>
+        </header>
+    </div>
+
+    <div class="h-[72px] lg:h-[76px]"></div>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="relative overflow-hidden py-20 px-6 bg-gradient-to-br from-white via-[#FFFCF5] to-white">
+            <div class="absolute top-40 -left-20 w-80 h-80 bg-[#F5A623]/10 rounded-full blur-3xl"></div>
+            <div class="absolute bottom-20 right-0 w-96 h-96 bg-[#D92B2B]/5 rounded-full blur-3xl"></div>
+            <div class="max-w-4xl mx-auto text-center relative z-10">
+                <div class="inline-flex items-center gap-2 bg-[#FEF3C7] rounded-full px-4 py-1.5 text-sm border border-[#F5A623]/40 mb-6">
+                    <i class="fa-regular fa-newspaper text-[#D92B2B]"></i> Latest Updates
+                </div>
+                <h1 class="text-5xl md:text-6xl font-extrabold"><span class="gradient-text-red-gold">Our Blog</span></h1>
+                <p class="text-gray-600 text-lg mt-6 max-w-2xl mx-auto">Insights, tutorials, and updates from the world of software development and technology education.</p>
+            </div>
+        </section>
+
+        <!-- Blog Posts Grid -->
+        <section class="max-w-7xl mx-auto px-6 py-12">
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" id="blogPostsContainer">
+                <!-- Posts will be loaded here dynamically -->
+            </div>
+
+            <!-- Pagination -->
+            <div class="flex justify-center mt-12 pagination" id="paginationContainer">
+                <!-- Pagination will be loaded here -->
+            </div>
+        </section>
+
+        <!-- Newsletter Section -->
+        <section class="py-20 px-6 bg-[#FFFBEF]">
+            <div class="max-w-4xl mx-auto text-center">
+                <div class="inline-flex items-center gap-2 bg-white rounded-full px-4 py-1.5 text-sm border border-[#F5A623]/40 mb-6">
+                    <i class="fa-regular fa-envelope text-[#D92B2B]"></i> Stay Updated
+                </div>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800">Subscribe to Our <span class="gradient-text-red-gold">Newsletter</span></h2>
+                <p class="text-gray-500 mt-4 max-w-2xl mx-auto">Get the latest tech insights, tutorials, and course updates delivered straight to your inbox.</p>
+                <div class="flex flex-wrap justify-center gap-4 mt-8">
+                    <input type="email" placeholder="Your email address" class="px-6 py-3 rounded-full w-80 border border-[#F5A623]/30 focus:outline-none focus:border-[#D92B2B] bg-white">
+                    <button class="btn-red-solid px-8 py-3 rounded-full text-white font-semibold">Subscribe <i class="fa-solid fa-arrow-right ml-2"></i></button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-[#0A0705] border-t border-[#F5A623]/30 pt-16 pb-8 text-gray-300">
+        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-4 gap-8">
+            <div>
+                <img src="Prajna Inofrmatics.png" alt="Prajna Informatics" class="w-32 h-20 mb-3" onerror="this.style.display='none'">
+                <p class="text-sm text-gray-400 mt-3">Empowering pupils' growth & developing knowledge to drive performance.</p>
+            </div>
+            <div>
+                <h4 class="font-semibold text-white mb-3">Important Links</h4>
+                <ul class="space-y-1 text-sm">
+                    <li><a href="#" class="hover:text-[#F5A623] transition">Our Team</a></li>
+                    <li><a href="#" class="hover:text-[#F5A623] transition">Leadership</a></li>
+                    <li><a href="#" class="hover:text-[#F5A623] transition">Careers</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-semibold text-white mb-3">Popular Subjects</h4>
+                <ul class="space-y-1 text-sm">
+                    <li>Cloud Computing</li>
+                    <li>Data Science</li>
+                    <li>AI & ML</li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-semibold text-white mb-3">Get In Touch</h4>
+                <p class="text-sm">Jagannath Nagar, Rasulgarh, Bhubaneswar, 751010</p>
+                <p class="mt-2 text-[#F5A623]">info@thesli.com</p>
+                <div class="flex gap-4 mt-4 text-xl">
+                    <i class="fab fa-facebook hover:text-[#F5A623] cursor-pointer transition"></i>
+                    <i class="fab fa-twitter hover:text-[#F5A623] cursor-pointer transition"></i>
+                    <i class="fab fa-instagram hover:text-[#D92B2B] cursor-pointer transition"></i>
+                </div>
+            </div>
+        </div>
+        <div class="text-center text-gray-500 text-xs mt-12 pt-6 border-t border-white/10">© 2026 SLI The Self Learning Interface — Prajna Informatics. Let's Learn Fundamentally</div>
+    </footer>
+
+    <script>
+        // Mobile Drawer
+        const menuBtn = document.getElementById('mobileMenuTrigger');
+        const drawer = document.getElementById('mobileDrawer');
+        const closeBtn = document.getElementById('closeDrawer');
+
+        if (menuBtn && drawer && closeBtn) {
+            menuBtn.addEventListener('click', () => drawer.classList.remove('translate-x-full'));
+            closeBtn.addEventListener('click', () => drawer.classList.add('translate-x-full'));
+        }
+
+        function adjustHeaderSpacing() {
+            const header = document.querySelector('.site-header-premium');
+            const spacer = document.querySelector('.h-\\[72px\\]');
+            if (header && spacer) {
+                spacer.style.height = header.offsetHeight + 'px';
+            }
+        }
+        window.addEventListener('load', adjustHeaderSpacing);
+        window.addEventListener('resize', adjustHeaderSpacing);
+
+        // Blog Posts Data
+        const blogPosts = [
+            {
+                title: "SQL (Structured Query Language)",
+                slug: "sql.html",
+                image: "https://i0.wp.com/thesli.in/wp-content/uploads/2023/07/SQL.png?fit=430%2C460&ssl=1",
+                category: "Database",
+                date: "Oct 28, 2023",
+                author: "Nihar Ranjan",
+                excerpt: "Complete guide to SQL fundamentals, queries, joins, and database management techniques. Learn how to retrieve, insert, update, and delete data efficiently."
+            },
+            {
+                title: "Android OS",
+                slug: "android-os.html",
+                image: "https://i0.wp.com/thesli.in/wp-content/uploads/2023/07/ANDROID-OS.jpg?fit=430%2C460&ssl=1",
+                category: "Mobile",
+                date: "Aug 26, 2023",
+                author: "Nihar Ranjan",
+                excerpt: "Complete guide to Android operating system architecture and application development. Master the fundamentals of Android app creation."
+            },
+            {
+                title: "Computer Fundamentals",
+                slug: "computer-fundamentals.html",
+                image: "https://i0.wp.com/thesli.in/wp-content/uploads/2023/07/Comp-Fundameantal.jpg?fit=430%2C460&ssl=1",
+                category: "Fundamentals",
+                date: "Aug 26, 2023",
+                author: "Nihar Ranjan",
+                excerpt: "Understanding the basics of computer hardware, software, and how they work together to perform complex tasks efficiently."
+            },
+            {
+                title: "React Js",
+                slug: "react-js.html",
+                image: "https://i0.wp.com/thesli.in/wp-content/uploads/2023/07/react.png?fit=430%2C460&ssl=1",
+                category: "Frontend",
+                date: "Aug 26, 2023",
+                author: "Nihar Ranjan",
+                excerpt: "Build modern web applications with React. Learn components, state management, hooks, and advanced patterns for scalable apps."
+            },
+            {
+                title: "Node Js",
+                slug: "node-js.html",
+                image: "https://i0.wp.com/thesli.in/wp-content/uploads/2023/07/Node-JS.png?fit=430%2C460&ssl=1",
+                category: "Backend",
+                date: "Aug 26, 2023",
+                author: "Nihar Ranjan",
+                excerpt: "Server-side JavaScript with Node.js. Build scalable network applications, RESTful APIs, and real-time services."
+            },
+            {
+                title: "RDBMS: Relational Database Management System",
+                slug: "rdbms.html",
+                image: "https://i0.wp.com/thesli.in/wp-content/uploads/2023/07/rdbms.png?fit=430%2C460&ssl=1",
+                category: "Database",
+                date: "Aug 26, 2023",
+                author: "Nihar Ranjan",
+                excerpt: "Complete guide to Relational Database Management Systems, their architecture, normalization, and best practices."
+            },
+            {
+                title: "Mongo DB",
+                slug: "mongodb.html",
+                image: "https://i0.wp.com/thesli.in/wp-content/uploads/2023/07/mango-db.png?fit=430%2C460&ssl=1",
+                category: "NoSQL",
+                date: "Aug 26, 2023",
+                author: "Nihar Ranjan",
+                excerpt: "NoSQL database guide. Learn document-based data modeling, aggregation pipelines, and performance tuning strategies."
+            },
+            {
+                title: "Maria DB",
+                slug: "mariadb.html",
+                image: "https://i0.wp.com/thesli.in/wp-content/uploads/2023/07/MARIA-DB.png?fit=430%2C460&ssl=1",
+                category: "Database",
+                date: "Aug 26, 2023",
+                author: "Nihar Ranjan",
+                excerpt: "Open-source relational database management system. Learn MariaDB from scratch with practical examples and use cases."
+            },
+            {
+                title: "Advanced JAVA",
+                slug: "advanced-java.html",
+                image: "https://i0.wp.com/thesli.in/wp-content/uploads/2023/07/java-adv.png?fit=430%2C460&ssl=1",
+                category: "Programming",
+                date: "Aug 26, 2023",
+                author: "Nihar Ranjan",
+                excerpt: "Deep dive into advanced Java concepts including multithreading, collections framework, JVM internals, and design patterns."
+            },
+            {
+                title: "The Nobel Prize",
+                slug: "the-nobel-prize.html",
+                image: "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop",
+                category: "Awards",
+                date: "Nov 27, 2024",
+                author: "Nihar Ranjan",
+                excerpt: "The Nobel Prize is a set of annual international awards bestowed in several categories by Swedish and Norwegian institutions."
+            }
+        ];
+
+        let currentPage = 1;
+        const postsPerPage = 6;
+
+        function renderBlogPosts() {
+            const start = (currentPage - 1) * postsPerPage;
+            const end = start + postsPerPage;
+            const currentPosts = blogPosts.slice(start, end);
+            const container = document.getElementById('blogPostsContainer');
+            
+            if (container) {
+                container.innerHTML = currentPosts.map(post => `
+                    <div class="blog-card group">
+                        <div class="overflow-hidden h-48">
+                            <img src="${post.image}" alt="${post.title}" class="blog-thumbnail w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105">
+                        </div>
+                        <div class="p-6">
+                            <div class="flex items-center gap-2 mb-3">
+                                <span class="text-xs bg-[#FEF3C7] text-[#D92B2B] px-2 py-1 rounded-full">${post.category}</span>
+                                <span class="text-xs text-gray-400"><i class="fa-regular fa-calendar mr-1"></i> ${post.date}</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-800 mb-2 group-hover:text-[#D92B2B] transition"><a href="${post.slug}">${post.title}</a></h3>
+                            <p class="text-gray-500 text-sm mb-4">${post.excerpt.substring(0, 120)}...</p>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-2">
+                                    <i class="fa-regular fa-user-circle text-[#D92B2B]"></i>
+                                    <span class="text-xs text-gray-500">${post.author}</span>
+                                </div>
+                                <a href="${post.slug}" class="text-[#D92B2B] text-sm font-medium hover:text-[#F5A623] transition">Read More <i class="fa-solid fa-arrow-right ml-1"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+            }
+            
+            renderPagination();
+        }
+
+        function renderPagination() {
+            const totalPages = Math.ceil(blogPosts.length / postsPerPage);
+            const paginationContainer = document.getElementById('paginationContainer');
+            
+            if (paginationContainer && totalPages > 1) {
+                let paginationHTML = '';
+                
+                // Previous button
+                if (currentPage > 1) {
+                    paginationHTML += `<a href="#" class="page-numbers prev" data-page="${currentPage - 1}"><i class="fa-solid fa-chevron-left"></i></a>`;
+                }
+                
+                // Page numbers
+                for (let i = 1; i <= totalPages; i++) {
+                    if (i === currentPage) {
+                        paginationHTML += `<span class="page-numbers current">${i}</span>`;
+                    } else {
+                        paginationHTML += `<a href="#" class="page-numbers" data-page="${i}">${i}</a>`;
+                    }
+                }
+                
+                // Next button
+                if (currentPage < totalPages) {
+                    paginationHTML += `<a href="#" class="page-numbers next" data-page="${currentPage + 1}"><i class="fa-solid fa-chevron-right"></i></a>`;
+                }
+                
+                paginationContainer.innerHTML = paginationHTML;
+                
+                // Add click handlers
+                document.querySelectorAll('.page-numbers[data-page]').forEach(link => {
+                    link.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        currentPage = parseInt(link.dataset.page);
+                        renderBlogPosts();
+                        window.scrollTo({ top: 400, behavior: 'smooth' });
+                    });
+                });
+            }
+        }
+
+        // Initialize blog posts
+        renderBlogPosts();
+
+        // Search toggle
+        document.querySelectorAll('.search-toggle, .search-toggle-mobile').forEach(btn => {
+            btn.addEventListener('click', () => alert('🔍 Search functionality coming soon!'));
+        });
+    </script>
+</body>
+</html>

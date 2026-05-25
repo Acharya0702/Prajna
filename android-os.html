@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="en-US" class="no-js" itemtype="https://schema.org/Article" itemscope>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+    <title>Android OS Tutorial | Mobile Development | PRAJNA Informatics</title>
+    <meta name="description" content="Complete Android OS tutorial covering introduction, development environment setup, Views, Intents, GPS functionality, and more. Learn Android app development.">
+    <link rel="canonical" href="https://thesli.in/android-os/">
+    
+    <!-- Google Fonts + Font Awesome + Tailwind -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #FFFFFF;
+            overflow-x: hidden;
+            color: #1F2937;
+        }
+
+        /* Pearl Red + Golden Yellow theme */
+        :root {
+            --pearl-red: #D92B2B;
+            --pearl-red-dark: #A51C1C;
+            --golden: #F5A623;
+            --golden-dark: #D48A1A;
+            --gray-soft: #F9F9F9;
+        }
+
+        /* header glassmorphism with gold-red borders */
+        .site-header-premium {
+            background: rgba(255, 255, 255, 0.96);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(245, 166, 35, 0.4);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+        }
+
+        /* HOVER REVEAL FOR TOP HEADER */
+        .top-header-reveal {
+            max-height: 0;
+            opacity: 0;
+            visibility: hidden;
+            overflow: hidden;
+            border-bottom: none;
+            transition: max-height 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1),
+                opacity 0.3s ease,
+                visibility 0.3s ease,
+                padding 0.3s ease,
+                border-width 0.2s ease;
+            transform: translateY(-8px);
+        }
+
+        .navbar-hover-wrapper:hover .top-header-reveal,
+        .site-header-premium:hover .top-header-reveal {
+            max-height: 80px;
+            opacity: 1;
+            visibility: visible;
+            border-bottom-width: 1px;
+            transform: translateY(0);
+            padding-top: 0.25rem;
+            padding-bottom: 0.25rem;
+        }
+
+        .main-header-bar {
+            transition: all 0.2s ease;
+            background: rgba(255, 255, 255, 0.98);
+        }
+
+        /* custom dropdown */
+        .nav-dropdown-courses {
+            position: relative;
+        }
+
+        .dropdown-menu-courses {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            min-width: 240px;
+            background: #FFFFFF;
+            backdrop-filter: blur(0);
+            border-radius: 20px;
+            border: 1px solid rgba(245, 166, 35, 0.4);
+            box-shadow: 0 25px 35px -12px rgba(0, 0, 0, 0.12);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(12px);
+            transition: all 0.2s ease;
+            z-index: 200;
+        }
+
+        .nav-dropdown-courses:hover .dropdown-menu-courses {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-item-custom {
+            display: block;
+            padding: 0.7rem 1.5rem;
+            color: #2C3E50;
+            font-weight: 500;
+            font-size: 0.85rem;
+            transition: all 0.2s;
+            border-bottom: 1px solid #FEF3C7;
+        }
+
+        .dropdown-item-custom:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-item-custom:hover {
+            background: #FEF3C7;
+            color: var(--pearl-red);
+            padding-left: 1.8rem;
+        }
+
+        .btn-gold-outline {
+            border: 1.5px solid var(--golden);
+            background: transparent;
+            transition: 0.2s;
+        }
+
+        .btn-gold-outline:hover {
+            background: var(--golden);
+            color: #1E1B1B;
+            border-color: var(--golden);
+        }
+
+        .btn-red-solid {
+            background: linear-gradient(105deg, #D92B2B, #B91C1C);
+            box-shadow: 0 8px 18px rgba(217, 43, 43, 0.2);
+        }
+
+        .btn-red-solid:hover {
+            background: linear-gradient(105deg, #B91C1C, #991B1B);
+            transform: scale(1.02);
+        }
+
+        .gradient-text-red-gold {
+            background: linear-gradient(135deg, #D92B2B 0%, #F5A623 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #F3F4F6;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--pearl-red);
+            border-radius: 10px;
+        }
+
+        @media (max-width: 1024px) {
+            .top-header-reveal {
+                display: none !important;
+            }
+            .navbar-hover-wrapper:hover .top-header-reveal {
+                display: none !important;
+            }
+        }
+
+        /* Article Styles */
+        .article-content {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: #374151;
+        }
+        .article-content h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            color: #1F2937;
+        }
+        .article-content h2 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-top: 1.8rem;
+            margin-bottom: 1rem;
+            color: #1F2937;
+            border-left: 4px solid #D92B2B;
+            padding-left: 1rem;
+        }
+        .article-content h3 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+            color: #374151;
+        }
+        .article-content h4, .article-content h5, .article-content h6 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-top: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: #D92B2B;
+        }
+        .article-content p {
+            margin-bottom: 1rem;
+        }
+        .article-content ul, .article-content ol {
+            margin: 1rem 0 1rem 2rem;
+        }
+        .article-content li {
+            margin-bottom: 0.5rem;
+        }
+        .article-content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .article-content th {
+            background: linear-gradient(135deg, #D92B2B, #B91C1C);
+            color: white;
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+        }
+        .article-content td {
+            padding: 10px 12px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        .article-content tr:hover {
+            background: #FEF3C7;
+        }
+        .article-content code {
+            background: #FEF3C7;
+            padding: 2px 6px;
+            border-radius: 6px;
+            font-family: monospace;
+            font-size: 0.9em;
+            color: #D92B2B;
+        }
+        .article-content pre {
+            background: #1F2937;
+            color: #e5e7eb;
+            padding: 1rem;
+            border-radius: 12px;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+        }
+        .article-content pre code {
+            background: none;
+            color: #e5e7eb;
+            padding: 0;
+        }
+        .article-content blockquote {
+            border-left: 4px solid #F5A623;
+            background: #FFFBEF;
+            padding: 1rem 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+            font-style: italic;
+        }
+        .article-content .wp-block-image {
+            margin: 1.5rem 0;
+            text-align: center;
+        }
+        .article-content .wp-block-image img {
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            max-width: 100%;
+            height: auto;
+        }
+        .article-content .wp-block-image figcaption {
+            font-size: 0.85rem;
+            color: #6B7280;
+            margin-top: 0.5rem;
+        }
+        .table-wrapper {
+            overflow-x: auto;
+        }
+        .toc {
+            background: #FFFBEF;
+            border: 1px solid #F5A623;
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .toc h3 {
+            margin-top: 0;
+            color: #D92B2B;
+        }
+        .toc ul {
+            margin: 0;
+            list-style: none;
+        }
+        .toc li {
+            margin-bottom: 0.5rem;
+        }
+        .toc a {
+            color: #374151;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .toc a:hover {
+            color: #D92B2B;
+        }
+    </style>
+</head>
+
+<body class="bg-gradient-to-r from-[#BF953F]/20 via-[#FCF6BA]/20 to-[#B38728]/20 min-h-screen">
+
+    <!-- =================== MASTHEAD : PEARL RED & GOLD HEADER =================== -->
+    <div class="navbar-hover-wrapper">
+        <header id="masthead" class="site-header-premium fixed top-0 w-full z-50 transition-all duration-200" role="banner">
+
+            <!-- TOP HEADER - HIDDEN INITIALLY -->
+            <div class="top-header-reveal bg-white/95 backdrop-blur-sm border-b border-[#F5A623]/20 transition-all duration-300">
+                <div class="max-w-7xl mx-auto px-6 py-1.5 flex items-center justify-between">
+                    <div class="flex items-center gap-6">
+                        <div class="flex gap-3 text-gray-600">
+                            <a href="https://www.facebook.com/profile.php?id=100083228295300" target="_blank" aria-label="Facebook" class="hover:text-[#D92B2B] transition text-lg"><i class="fab fa-facebook-f"></i></a>
+                            <a href="https://twitter.com/stheetaprajna" target="_blank" aria-label="X" class="hover:text-[#D92B2B] transition text-lg"><i class="fab fa-twitter"></i></a>
+                            <a href="https://www.instagram.com/stheetaprajna_learningidea/" target="_blank" aria-label="Instagram" class="hover:text-[#D92B2B] transition text-lg"><i class="fab fa-instagram"></i></a>
+                        </div>
+                        <div class="h-5 w-px bg-gray-300"></div>
+                        <img src="https://thesli.in/wp-content/uploads/2025/10/Logo.png" class="h-8 w-auto" alt="SLI Logo">
+                    </div>
+                    <nav class="secondary-nav" aria-label="Secondary">
+                        <ul class="flex gap-6 text-sm font-medium text-gray-700">
+                            <li><a href="about.html" class="hover:text-[#D92B2B] transition">About</a></li>
+                            <li><a href="#" class="hover:text-[#D92B2B] transition">AI@IIT</a></li>
+                            <li><a href="#" class="hover:text-[#D92B2B] transition">Career Opportunity</a></li>
+                            <li><a href="#" class="hover:text-[#D92B2B] transition">Cart</a></li>
+                            <li><a href="#" class="hover:text-[#D92B2B] transition">Checkout</a></li>
+                        </ul>
+                    </nav>
+                    <button class="search-toggle text-gray-600 hover:text-[#D92B2B] transition" aria-label="Search">
+                        <i class="fa-solid fa-magnifying-glass text-sm"></i> <span class="text-sm font-medium ml-1 hidden md:inline">Search</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- MAIN HEADER -->
+            <div class="main-header-bar bg-gradient-to-r from-[#7A0010] via-[#D4AF37] to-[#9E0018] mx-auto px-5 py-3 flex items-center justify-between">
+                <div class="site-branding flex items-center gap-3">
+                    <a class="brand flex items-center" href="index.html">
+                        <img width="180" height="60" src="Prajna Inofrmatics.png" class="custom-logo h-10 w-auto"
+                            alt="PRAJNA Informatics" decoding="async"
+                            onerror="this.onerror=null; this.src='https://placehold.co/180x60?text=PRAJNA+Informatics';">
+                    </a>
+                    <span class="hidden md:inline-block text-lg font-medium bg-[#FEF3C7] text-[#D92B2B] px-2 py-0.5 rounded-full">PRAJNA Informatics</span>
+                </div>
+
+                <nav id="site-navigation" class="hidden lg:block" aria-label="Primary">
+                    <ul class="flex gap-7 text-[15px] font-semibold text-white">
+                        <li><a href="index.html" class="hover:text-[#D92B2B] transition">Home</a></li>
+                        <li class="nav-dropdown-courses relative">
+                            <a href="#" class="flex items-center gap-1 hover:text-[#D92B2B] transition">Courses <i class="fa-solid fa-chevron-down text-[10px]"></i></a>
+                            <ul class="dropdown-menu-courses absolute left-0 top-full mt-1 shadow-xl">
+                                <li><a href="#" class="dropdown-item-custom">📘 Courses List</a></li>
+                                <li><a href="#" class="dropdown-item-custom">⚡ Live Workshops</a></li>
+                                <li><a href="#" class="dropdown-item-custom">👨‍🏫 Instructor Registration</a></li>
+                                <li><a href="#" class="dropdown-item-custom">🎓 Student Registration</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="about.html" class="hover:text-[#D92B2B] transition">About</a></li>
+                        <li><a href="helpdesk.html" class="hover:text-[#D92B2B] transition">Help Desk</a></li>
+                        <li><a href="blog.html" class="hover:text-[#D92B2B] transition">Blog</a></li>
+                        <li><a href="contact.html" class="hover:text-[#D92B2B] transition">Contact</a></li>
+                    </ul>
+                </nav>
+
+                <div class="flex lg:hidden items-center gap-4">
+                    <button class="search-toggle-mobile text-gray-700 hover:text-[#D92B2B]"><i class="fa-solid fa-magnifying-glass text-base"></i></button>
+                    <button id="mobileMenuTrigger" class="text-2xl text-gray-700 focus:outline-none"><i class="fa-solid fa-bars"></i></button>
+                </div>
+
+                <div class="hidden lg:flex items-center gap-4">
+                    <a href="https://forms.gle/9SMX5z9DLvusnr1GA" target="_blank" class="px-4 py-2 rounded-full text-sm font-semibold btn-red-solid text-white shadow-sm">Join Free</a>
+                </div>
+            </div>
+
+            <!-- Mobile Drawer -->
+            <div id="mobileDrawer" class="fixed inset-0 bg-white z-50 transform translate-x-full transition-transform duration-300 ease-in-out lg:hidden"
+                style="box-shadow: -5px 0 30px rgba(0,0,0,0.1);">
+                <div class="flex justify-between items-center p-5 border-b border-[#F5A623]/30">
+                    <img src="https://i0.wp.com/thesli.in/wp-content/uploads/2022/07/cropped-cropped-sli-right-align.png?fit=563%2C189&ssl=1" class="h-8 w-auto" alt="logo">
+                    <button id="closeDrawer" class="text-2xl text-gray-600"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+                <div class="p-6 overflow-y-auto h-full pb-32">
+                    <ul class="flex flex-col gap-5 text-lg font-semibold">
+                        <li><a href="index.html" class="block py-2 border-b border-gray-100">Home</a></li>
+                        <li><a href="#" class="block py-2 border-b border-gray-100">Courses</a></li>
+                        <li><a href="about.html" class="block py-2 border-b border-gray-100">About</a></li>
+                        <li><a href="helpdesk.html" class="block py-2 border-b border-gray-100">Help Desk</a></li>
+                        <li><a href="blog.html" class="block py-2 border-b border-gray-100">Blog</a></li>
+                        <li><a href="contact.html" class="block py-2 border-b border-gray-100">Contact</a></li>
+                    </ul>
+                    <div class="mt-8 pt-4 border-t border-gray-200 flex flex-col gap-4">
+                        <div class="flex gap-5 text-gray-600 text-xl">
+                            <a href="https://www.facebook.com/profile.php?id=100083228295300" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                            <a href="https://twitter.com/stheetaprajna" target="_blank"><i class="fab fa-twitter"></i></a>
+                            <a href="https://www.instagram.com/stheetaprajna_learningidea/" target="_blank"><i class="fab fa-instagram"></i></a>
+                            <a href="https://www.linkedin.com/in/stheetaprajna-pati-253978223" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                        <a href="https://forms.gle/9SMX5z9DLvusnr1GA" target="_blank" class="btn-red-solid text-center text-white py-2 rounded-full text-sm">Join Free →</a>
+                    </div>
+                </div>
+            </div>
+        </header>
+    </div>
+
+    <div class="h-[72px] lg:h-[76px]"></div>
+
+    <main class="max-w-5xl mx-auto px-6 py-12">
+        <!-- Article Header -->
+        <div class="text-center mb-10">
+            <div class="inline-flex items-center gap-2 bg-[#FEF3C7] rounded-full px-4 py-1.5 text-sm border border-[#F5A623]/40 mb-4">
+                <i class="fa-brands fa-android text-[#D92B2B]"></i> Mobile Development
+            </div>
+            <h1 class="text-4xl md:text-5xl font-extrabold text-gray-800 mb-4">Android <span class="gradient-text-red-gold">OS</span></h1>
+            <div class="flex items-center justify-center gap-4 text-gray-500 text-sm">
+                <span><i class="fa-regular fa-user mr-1"></i> Nihar Ranjan</span>
+                <span><i class="fa-regular fa-calendar mr-1"></i> August 26, 2023</span>
+                <span><i class="fa-regular fa-clock mr-1"></i> 249 min read</span>
+            </div>
+        </div>
+
+        <!-- Featured Image -->
+        <div class="mb-10 text-center">
+            <img src="https://i0.wp.com/thesli.in/wp-content/uploads/2023/07/ANDROID-OS.jpg?fit=430%2C460&ssl=1" alt="Android OS Development" class="rounded-2xl shadow-lg mx-auto border border-[#F5A623]/30" style="max-width: 300px;">
+            <p class="text-gray-500 text-sm mt-3">Course on Android OS development</p>
+        </div>
+
+        <!-- Table of Contents -->
+        <div class="toc">
+            <h3 class="text-xl font-bold"><i class="fa-regular fa-list mr-2 text-[#D92B2B]"></i> Table of Contents</h3>
+            <ul class="grid md:grid-cols-2 gap-2 mt-4">
+                <li><a href="#chapter1"><i class="fa-regular fa-file-lines mr-2 text-[#F5A623]"></i> Chapter 1: What is Android?</a></li>
+                <li><a href="#chapter2"><i class="fa-regular fa-file-lines mr-2 text-[#F5A623]"></i> Chapter 2: Downloading and Installing Eclipse</a></li>
+                <li><a href="#chapter3"><i class="fa-regular fa-file-lines mr-2 text-[#F5A623]"></i> Chapter 3: Downloading and Installing the Android SDK</a></li>
+                <li><a href="#chapter4"><i class="fa-regular fa-file-lines mr-2 text-[#F5A623]"></i> Chapter 4: Exploring the Android SDK</a></li>
+                <li><a href="#chapter5"><i class="fa-regular fa-file-lines mr-2 text-[#F5A623]"></i> Chapter 5: Application: Hello World!</a></li>
+                <li><a href="#chapter6"><i class="fa-regular fa-file-lines mr-2 text-[#F5A623]"></i> Chapter 6: Using the Command-Line Tools</a></li>
+                <li><a href="#chapter7"><i class="fa-regular fa-file-lines mr-2 text-[#F5A623]"></i> Chapter 7: Using Intents and the Phone Dialer</a></li>
+                <li><a href="#chapter8"><i class="fa-regular fa-file-lines mr-2 text-[#F5A623]"></i> Chapter 8: Lists, Menus, And Other Views</a></li>
+                <li><a href="#chapter9"><i class="fa-regular fa-file-lines mr-2 text-[#F5A623]"></i> Chapter 9: Using the Cell Phone's GPS Functionality</a></li>
+                <li><a href="#chapter10"><i class="fa-regular fa-file-lines mr-2 text-[#F5A623]"></i> Chapter 10: Using the Google API with GTalk</a></li>
+                <li><a href="#chapter11"><i class="fa-regular fa-file-lines mr-2 text-[#F5A623]"></i> Chapter 11: Application: Find a Friend</a></li>
+                <li><a href="#chapter12"><i class="fa-regular fa-file-lines mr-2 text-[#F5A623]"></i> Chapter 12: Android SDK Tool Reference</a></li>
+            </ul>
+        </div>
+
+        <!-- Article Content -->
+        <article class="article-content">
+            
+            <!-- Chapter 1 -->
+            <h1 id="chapter1">Chapter 1: What is Android?</h1>
+            
+            <h3>Key Skills &amp; Concepts</h3>
+            <ul>
+                <li>History of embedded device programming</li>
+                <li>Explanation of Open Handset Alliance</li>
+                <li>First look at the Android home screen</li>
+            </ul>
+
+            <p>It can be said that, for a while, traditional desktop application developers have been spoiled. This is not to say that traditional desktop application development is easier than other forms of development. However, as traditional desktop application developers, we have had the ability to create almost any kind of application we can imagine.</p>
+
+            <div class="wp-block-image">
+                <figure>
+                    <img src="https://i0.wp.com/thesli.in/wp-content/uploads/2023/11/image-23.png?resize=709%2C556&ssl=1" alt="Android Home Screen">
+                    <figcaption>Android home screen</figcaption>
+                </figure>
+            </div>
+
+            <h3>Brief History of Embedded Device Programming</h3>
+            <p>For a long time, cell phone developers comprised a small sect of a slightly larger group of developers known as embedded device developers. Seen as a less "glamorous" sibling to desktop—and later web—development, embedded device development typically got the proverbial short end of the stick as far as hardware and operating system features.</p>
+
+            <h3>Open Handset Alliance and Android</h3>
+            <p>This barrier to application development began to crumble in November of 2007 when Google, under the Open Handset Alliance, released Android. The Open Handset Alliance is a group of hardware and software developers, including Google, NTT DoCoMo, Sprint Nextel, and HTC, whose goal is to create a more open cell phone environment.</p>
+
+            <blockquote>
+                <p>Google, in promoting the new Android operating system, even went as far as to create a $10 million contest looking for new and exciting Android applications.</p>
+            </blockquote>
+
+            <h3>Introduction to Android</h3>
+            <p>Android, as a system, is a Java-based operating system that runs on the Linux 2.6 kernel. The system is very lightweight and full featured. Android applications are developed using Java and can be ported rather easily to the new platform.</p>
+
+            <p>Other features of Android include an accelerated 3-D graphics engine (based on hardware support), database support powered by SQLite, and an integrated web browser.</p>
+
+            <!-- Chapter 2 -->
+            <h1 id="chapter2">Chapter 2: Downloading and Installing Eclipse</h1>
+            
+            <h3>Key Skills &amp; Concepts</h3>
+            <ul>
+                <li>Selecting a development environment</li>
+                <li>Downloading Eclipse</li>
+                <li>Installing and configuring Eclipse</li>
+            </ul>
+
+            <p>Android applications are developed in Java. Android itself is not a language, but rather an environment within which to run applications. As such, you can theoretically use any distribution or integrated development environment (IDE) you have at your disposal to begin your development.</p>
+
+            <h3>Why Eclipse?</h3>
+            <p>Eclipse is the recommended IDE for Android applications for several reasons:</p>
+            <ul>
+                <li>It is one of the most fully featured, free Java IDEs available</li>
+                <li>The Open Handset Alliance has released an Android plugin for Eclipse</li>
+                <li>Eclipse is available for Mac, Windows, and Linux</li>
+            </ul>
+
+            <!-- Chapter 3 -->
+            <h1 id="chapter3">Chapter 3: Downloading and Installing the Android SDK</h1>
+            
+            <h3>Key Skills &amp; Concepts</h3>
+            <ul>
+                <li>Downloading the Android SDK</li>
+                <li>Using the Update feature of Eclipse</li>
+                <li>Downloading, installing, and configuring the Android plugin for Eclipse</li>
+                <li>Checking the PATH statement</li>
+            </ul>
+
+            <div class="wp-block-image">
+                <figure>
+                    <img src="https://i0.wp.com/thesli.in/wp-content/uploads/2023/11/image-54.png?resize=831%2C623&ssl=1" alt="Google Android Development Home Page">
+                    <figcaption>Figure 3-1: The Google Android development home page</figcaption>
+                </figure>
+            </div>
+
+            <h3>Downloading the Android SDK</h3>
+            <p>The Android SDK is easily accessible from the <a href="http://code.google.com/android" target="_blank">http://code.google.com/android</a> page. From the development home page, click the Download the SDK link under Getting Started.</p>
+
+            <h3>Configuring the Android Plugin for Eclipse</h3>
+            <p>After installing the Android plugin for Eclipse, restart Eclipse. The Android plugin for Eclipse is configured from the Preferences window of Eclipse.</p>
+
+            <!-- Chapter 4 -->
+            <h1 id="chapter4">Chapter 4: Exploring the Android SDK</h1>
+            
+            <h3>Key Skills &amp; Concepts</h3>
+            <ul>
+                <li>Using the Android SDK documentation</li>
+                <li>Using the Android SDK tools</li>
+                <li>Using the sample applications</li>
+                <li>Learning the life cycle of an Android application</li>
+            </ul>
+
+            <h3>Android Documentation</h3>
+            <p>The Android documentation is located in the Docs folder within the Android SDK. The documentation that is supplied with the SDK includes steps on downloading and installing the SDK, "Getting Started" quick steps for developing applications, and package definitions.</p>
+
+            <h3>Android Samples</h3>
+            <p>The Samples folder contains six sample applications that demonstrate a good cross-section of Android functionality:</p>
+            <ul>
+                <li>API Demos</li>
+                <li>Hello, Activity!</li>
+                <li>Lunar Lander</li>
+                <li>Note Pad</li>
+                <li>Skeleton App</li>
+                <li>Snake</li>
+            </ul>
+
+            <!-- Chapter 5 -->
+            <h1 id="chapter5">Chapter 5: Application: Hello World!</h1>
+            
+            <h3>Key Skills &amp; Concepts</h3>
+            <ul>
+                <li>Creating new Android projects</li>
+                <li>Working with Views</li>
+                <li>Using a TextView</li>
+                <li>Modifying the main.xml file</li>
+                <li>Running applications on the Android Emulator</li>
+            </ul>
+
+            <p>In this chapter, you will be creating your first Android Activity. This chapter examines the application-building process from start to finish. You will create two iterations of this Activity, each using different techniques for displaying information to the screen.</p>
+
+            <div class="wp-block-image">
+                <figure>
+                    <img src="https://i0.wp.com/thesli.in/wp-content/uploads/2023/11/image-77.png?resize=831%2C531&ssl=1" alt="Empty Eclipse development environment">
+                    <figcaption>Figure 5-1: The empty Eclipse development environment</figcaption>
+                </figure>
+            </div>
+
+            <h3>Creating Your First Android Project in Eclipse</h3>
+            <p>To start your first Android project, open Eclipse. Choose File | New | Android Project, which will launch the New Android Project wizard.</p>
+
+            <h3>Hello World! Using an Image</h3>
+            <p>In this section, you are going to use the Hello World! application to get more familiar with a relatively common practice in programming: displaying images.</p>
+
+            <pre><code>&lt;ImageView
+    android:id="@+id/imageview"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:src="@drawable/helloworld" /&gt;</code></pre>
+
+            <!-- Chapter 6 -->
+            <h1 id="chapter6">Chapter 6: Using the Command-Line Tools</h1>
+            
+            <h3>Key Skills &amp; Concepts</h3>
+            <ul>
+                <li>Using the Android SDK command-line tools</li>
+                <li>Creating a command environment</li>
+                <li>Navigating the Android server with a shell</li>
+                <li>Using the Android SDK in Linux</li>
+            </ul>
+
+            <p>The Android SDK comes with multiple tools to help you create and compile Android applications. These tools are in place to help users who do not wish to, or do not have a system capable of supporting, work within a GUI IDE.</p>
+
+            <!-- Chapter 7 -->
+            <h1 id="chapter7">Chapter 7: Using Intents and the Phone Dialer</h1>
+            
+            <h3>Key Skills &amp; Concepts</h3>
+            <ul>
+                <li>Using Intents</li>
+                <li>Creating code that interacts with the phone hardware</li>
+                <li>Learning the difference between dialing and calling</li>
+            </ul>
+
+            <h3>What Are Intents?</h3>
+            <p>An Intent is Android's method for relaying certain information from one Activity to another. An Intent, in simpler terms, expresses to Android your intent to do something. You can think of an Intent as a message passed between Activities.</p>
+
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr><th>Activity Action Intent</th><th>Message</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>DIAL_ACTION</td><td>Open the Dial Activity and dial the specified number</td></tr>
+                        <tr><td>CALL_ACTION</td><td>Place a call to supplied location</td></tr>
+                        <tr><td>WEB_SEARCH_ACTION</td><td>Open Google Search, or another web page if specified</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <pre><code>Intent callIntent = new Intent(Intent.CALL_ACTION, Uri.parse("tel:5551212"));
+callIntent.setLaunchFlags(Intent.NEW_TASK_LAUNCH);
+startActivity(callIntent);</code></pre>
+
+            <!-- Chapter 8 -->
+            <h1 id="chapter8">Chapter 8: Lists, Menus, And Other Views</h1>
+            
+            <h3>Key Skills &amp; Concepts</h3>
+            <ul>
+                <li>Building Activities</li>
+                <li>Using Android Menus</li>
+                <li>Using the AutoCompleteTextView</li>
+            </ul>
+
+            <div class="wp-block-image">
+                <figure>
+                    <img src="https://i0.wp.com/thesli.in/wp-content/uploads/2023/11/image-183.png?resize=629%2C525&ssl=1" alt="Android Menu">
+                    <figcaption>Android Menu</figcaption>
+                </figure>
+            </div>
+
+            <!-- Chapter 9 -->
+            <h1 id="chapter9">Chapter 9: Using the Cell Phone's GPS Functionality</h1>
+            
+            <h3>Key Skills &amp; Concepts</h3>
+            <ul>
+                <li>Using the Android location-based service APIs</li>
+                <li>Obtaining coordinate data from the GPS hardware</li>
+                <li>Using Google Maps to find your current location</li>
+            </ul>
+
+            <p>In this chapter, you are going to learn about the Android Location-Based API. This chapter is invaluable if you want to leverage the ability of Android to work with the Global Positioning System (GPS) hardware of a device.</p>
+
+            <!-- Chapter 10 -->
+            <h1 id="chapter10">Chapter 10: Using the Google API with GTalk</h1>
+            
+            <h3>Key Skills &amp; Concepts</h3>
+            <ul>
+                <li>Implementing a Google API package</li>
+                <li>Configuring the XMPP development settings for Google access</li>
+                <li>Implementing the View.OnClickListener( ) method</li>
+            </ul>
+
+            <!-- Chapter 11 -->
+            <h1 id="chapter11">Chapter 11: Application: Find a Friend</h1>
+            
+            <h3>Key Skills &amp; Concepts</h3>
+            <ul>
+                <li>Create a SQLite database</li>
+                <li>Create a custom Content Provider</li>
+                <li>Retrieve items from a database and pass them to a Google Maps Overlay</li>
+            </ul>
+
+            <!-- Chapter 12 -->
+            <h1 id="chapter12">Chapter 12: Android SDK Tool Reference</h1>
+            
+            <h3>Android Emulator Commands</h3>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr><th>Command</th><th>Description</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>-emulator starts the Android Emulator</td><td>Launches the Android Emulator</td></tr>
+                        <tr><td>-adb commands</td><td>Android Debug Bridge for device communication</td></tr>
+                        <tr><td>-emulator -avd &lt;avd_name&gt;</td><td>Starts a specific Android Virtual Device</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </article>
+
+        <!-- Author Bio -->
+        <div class="mt-12 p-6 bg-[#FFFBEF] rounded-2xl border border-[#F5A623]/30">
+            <div class="flex items-center gap-4">
+                <img src="https://secure.gravatar.com/avatar/847d9b3265aad2ef61ed1914da97b18f383061d8d68d8d5d22b11b96f5baa33f?s=96&d=mm&r=g" alt="Author" class="w-16 h-16 rounded-full border-2 border-[#D92B2B]">
+                <div>
+                    <h4 class="font-bold text-gray-800">About the Author</h4>
+                    <p class="text-gray-600 text-sm"><strong>Nihar Ranjan</strong> - Technical Writer and Mobile Development Expert at PRAJNA Informatics. Passionate about teaching Android development and mobile technologies.</p>
+                    <div class="flex gap-3 mt-2">
+                        <a href="#" class="text-gray-500 hover:text-[#D92B2B]"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-500 hover:text-[#D92B2B]"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="flex justify-between mt-10 pt-6 border-t border-gray-200">
+            <a href="computer-fundamentals.html" class="flex items-center gap-2 text-gray-600 hover:text-[#D92B2B] transition">
+                <i class="fa-solid fa-arrow-left"></i> Previous: Computer Fundamentals
+            </a>
+            <a href="sql.html" class="flex items-center gap-2 text-gray-600 hover:text-[#D92B2B] transition">
+                Next: SQL (Structured Query Language) <i class="fa-solid fa-arrow-right"></i>
+            </a>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-[#0A0705] border-t border-[#F5A623]/30 pt-16 pb-8 mt-12 text-gray-300">
+        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-4 gap-8">
+            <div>
+                <img src="Prajna Inofrmatics.png" alt="Prajna Informatics" class="w-32 h-20 mb-3" onerror="this.style.display='none'">
+                <p class="text-sm text-gray-400 mt-3">Empowering pupils' growth & developing knowledge to drive performance.</p>
+            </div>
+            <div>
+                <h4 class="font-semibold text-white mb-3">Important Links</h4>
+                <ul class="space-y-1 text-sm">
+                    <li><a href="#" class="hover:text-[#F5A623] transition">Our Team</a></li>
+                    <li><a href="#" class="hover:text-[#F5A623] transition">Leadership</a></li>
+                    <li><a href="#" class="hover:text-[#F5A623] transition">Careers</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-semibold text-white mb-3">Popular Subjects</h4>
+                <ul class="space-y-1 text-sm">
+                    <li>Cloud Computing</li>
+                    <li>Data Science</li>
+                    <li>AI & ML</li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-semibold text-white mb-3">Get In Touch</h4>
+                <p class="text-sm">Jagannath Nagar, Rasulgarh, Bhubaneswar, 751010</p>
+                <p class="mt-2 text-[#F5A623]">info@thesli.com</p>
+                <div class="flex gap-4 mt-4 text-xl">
+                    <i class="fab fa-facebook hover:text-[#F5A623] cursor-pointer transition"></i>
+                    <i class="fab fa-twitter hover:text-[#F5A623] cursor-pointer transition"></i>
+                    <i class="fab fa-instagram hover:text-[#D92B2B] cursor-pointer transition"></i>
+                </div>
+            </div>
+        </div>
+        <div class="text-center text-gray-500 text-xs mt-12 pt-6 border-t border-white/10">© 2026 SLI The Self Learning Interface — Prajna Informatics. Let's Learn Fundamentally</div>
+    </footer>
+
+    <script>
+        const menuBtn = document.getElementById('mobileMenuTrigger');
+        const drawer = document.getElementById('mobileDrawer');
+        const closeBtn = document.getElementById('closeDrawer');
+
+        if (menuBtn && drawer && closeBtn) {
+            menuBtn.addEventListener('click', () => drawer.classList.remove('translate-x-full'));
+            closeBtn.addEventListener('click', () => drawer.classList.add('translate-x-full'));
+        }
+
+        function adjustHeaderSpacing() {
+            const header = document.querySelector('.site-header-premium');
+            const spacer = document.querySelector('.h-\\[72px\\]');
+            if (header && spacer) {
+                spacer.style.height = header.offsetHeight + 'px';
+            }
+        }
+        window.addEventListener('load', adjustHeaderSpacing);
+        window.addEventListener('resize', adjustHeaderSpacing);
+
+        // Search toggle
+        document.querySelectorAll('.search-toggle, .search-toggle-mobile').forEach(btn => {
+            btn.addEventListener('click', () => alert('🔍 Search functionality coming soon!'));
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+    <title>Idea Inside India | Digital Assistance for Business & Technical Issues</title>
+    <meta name="description" content="Your Digital Assistance Partner. Software Development, Web Design, GST Accounting, AI Projects, Domain & Hosting, SEO & SEM Services since 2007.">
+    <!-- Google Fonts + Tailwind + Font Awesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #FFFFFF;
+            overflow-x: hidden;
+            color: #1F2937;
+        }
+
+        /* Pearl Red + Golden Yellow theme */
+        :root {
+            --pearl-red: #D92B2B;
+            --pearl-red-dark: #A51C1C;
+            --golden: #F5A623;
+            --golden-dark: #D48A1A;
+            --gray-soft: #F9F9F9;
+        }
+
+        .gradient-text-red-gold {
+            background: linear-gradient(135deg, #D92B2B 0%, #F5A623 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .btn-primary {
+            background: linear-gradient(95deg, #D92B2B, #B91C1C);
+            transition: all 0.2s ease;
+        }
+        .btn-primary:hover {
+            background: linear-gradient(95deg, #B91C1C, #991B1B);
+            transform: scale(1.02);
+            box-shadow: 0 20px 25px -12px rgba(217, 43, 43, 0.4);
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(245, 166, 35, 0.3);
+            border-radius: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        .glass-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 30px -12px rgba(217, 43, 43, 0.15);
+            border-color: rgba(217, 43, 43, 0.4);
+        }
+
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #F3F4F6;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #D92B2B;
+            border-radius: 10px;
+        }
+
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.7s ease;
+        }
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .service-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 35px -12px rgba(217, 43, 43, 0.2);
+        }
+    </style>
+</head>
+
+<body class="bg-gradient-to-r from-[#BF953F]/20 via-[#FCF6BA]/20 to-[#B38728]/20 min-h-screen">
+
+    <!-- Modern Header with Pearl Red & Gold -->
+    <header class="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-xl border-b border-[#F5A623]/30 transition-all">
+        <div class="max-w-7xl mx-auto px-6 py-3 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <img src="https://iitprivatelimited.com/wp-content/uploads/2016/10/logo-final.png" class="h-12 w-auto" alt="Idea Inside Logo">
+                <span class="text-xl font-bold gradient-text-red-gold">Idea Inside India</span>
+            </div>
+            <nav class="hidden md:flex gap-8 text-sm font-medium">
+                <a href="#" class="text-[#D92B2B] border-b-2 border-[#D92B2B] transition">Home</a>
+                <a href="#" class="text-gray-700 hover:text-[#D92B2B] transition">Career @ ii</a>
+                <a href="#" class="text-gray-700 hover:text-[#D92B2B] transition">About Us</a>
+                <a href="#" class="text-gray-700 hover:text-[#D92B2B] transition">Contact Us</a>
+                <a href="#" class="text-gray-700 hover:text-[#D92B2B] transition">Our Services</a>
+            </nav>
+            <div class="flex items-center gap-4">
+                <i class="fa-solid fa-magnifying-glass text-gray-600 hover:text-[#D92B2B] cursor-pointer"></i>
+                <button class="bg-gradient-to-r from-[#D92B2B] to-[#B91C1C] px-5 py-2 rounded-full text-sm font-semibold text-white shadow-md hover:shadow-lg transition">Get Started</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="pt-20">
+        <!-- Hero Slider Section -->
+        <section class="relative w-full overflow-hidden">
+            <div class="relative h-[500px] md:h-[600px]" id="heroSlider">
+                <div class="absolute inset-0 transition-opacity duration-700" id="slide1">
+                    <div class="absolute inset-0 bg-gradient-to-r from-black/60 to-black/40 z-10"></div>
+                    <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://iitprivatelimited.com/wp-content/themes/i-max/images/slide1.jpg');"></div>
+                    <div class="relative z-20 flex flex-col items-center justify-center h-full text-center px-6">
+                        <h2 class="text-4xl md:text-6xl font-bold text-white drop-shadow-lg">You Want a Website</h2>
+                        <p class="text-white/90 text-lg md:text-xl mt-4 drop-shadow-md">Complete Website Design and Development Solutions.</p>
+                        <button class="btn-primary px-8 py-3 rounded-full text-white font-semibold mt-8 shadow-lg">Get In for a New Idea</button>
+                    </div>
+                </div>
+                <button class="absolute left-4 top-1/2 -translate-y-1/2 z-30 bg-white/20 backdrop-blur rounded-full p-3 hover:bg-white/40 transition text-white" id="sliderPrev"><i class="fa-solid fa-chevron-left"></i></button>
+                <button class="absolute right-4 top-1/2 -translate-y-1/2 z-30 bg-white/20 backdrop-blur rounded-full p-3 hover:bg-white/40 transition text-white" id="sliderNext"><i class="fa-solid fa-chevron-right"></i></button>
+                <div class="absolute bottom-6 left-1/2 -translate-x-1/2 z-30 flex gap-2" id="sliderDots"></div>
+            </div>
+        </section>
+
+        <!-- Idea Begins Section -->
+        <section class="py-20 px-6 max-w-6xl mx-auto text-center">
+            <div class="animate-on-scroll">
+                <h1 class="text-4xl md:text-5xl font-bold"><span class="gradient-text-red-gold">IDEA BEGINS</span></h1>
+                <p class="text-gray-600 text-lg md:text-xl mt-6 leading-relaxed">
+                    We Are Expanding our Services in making of Digitalised India Since 2007. From very beginning of the journey, we focused on the actual need of our people and provide them user friendly application with all their requirements. Also we provide consultancy service to our client. Firstly starting from Education & Automation, Various types of Apps Development for windows android and mac devices, GST Accounting cum inventory management solution modules, AI Projects, Live workshop facility for students, professionals & Enthusiastic person or organisations. Up to a high quality Digital Assistance Services.
+                </p>
+                <p class="text-[#D92B2B] mt-6 italic font-medium">CEOsPen: "The whole binary system is the father of new tech era, the great Vedic invention".</p>
+            </div>
+        </section>
+
+        <!-- Services Grid -->
+        <section class="py-16 px-6 max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div class="glass-card p-8 text-center service-card animate-on-scroll">
+                    <img src="https://iitprivatelimited.com/wp-content/uploads/2016/10/software-development.png" alt="Software Development" class="w-32 h-auto mx-auto mb-4">
+                    <h3 class="text-xl font-bold text-[#D92B2B]">Software Development</h3>
+                </div>
+                <div class="glass-card p-8 text-center service-card animate-on-scroll">
+                    <img src="https://iitprivatelimited.com/wp-content/uploads/2016/10/design-technologies.png" alt="Web Design" class="w-32 h-auto mx-auto mb-4">
+                    <h3 class="text-xl font-bold text-[#D92B2B]">Web Design & Development</h3>
+                </div>
+                <div class="glass-card p-8 text-center service-card animate-on-scroll">
+                    <img src="https://iitprivatelimited.com/wp-content/uploads/2016/10/bulkTransfer.png" alt="SMS Services" class="w-32 h-auto mx-auto mb-4">
+                    <h3 class="text-xl font-bold text-[#D92B2B]">SMS Services</h3>
+                </div>
+                <div class="glass-card p-8 text-center service-card animate-on-scroll">
+                    <img src="https://iitprivatelimited.com/wp-content/uploads/2016/10/app-developmen.png" alt="App Development" class="w-32 h-auto mx-auto mb-4">
+                    <h3 class="text-xl font-bold text-[#D92B2B]">Applications Development</h3>
+                </div>
+            </div>
+        </section>
+
+        <!-- Clients Insight Section -->
+        <section class="relative py-24 px-6 overflow-hidden">
+            <div class="absolute inset-0 bg-cover bg-center opacity-20" style="background-image: url('https://iitprivatelimited.com/wp-content/uploads/2016/10/bba1.jpg');"></div>
+            <div class="absolute inset-0 bg-gradient-to-r from-[#D92B2B]/10 to-[#F5A623]/10"></div>
+            <div class="relative z-10 text-center">
+                <h2 class="text-4xl font-bold text-[#D92B2B] drop-shadow-sm">Clients Insight</h2>
+                <button class="btn-primary px-10 py-3 rounded-full text-white font-semibold text-xl mt-8 shadow-lg">Click here</button>
+            </div>
+        </section>
+
+        <!-- Services Oath & Gateway Bank -->
+        <section class="py-16 px-6 max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="animate-on-scroll">
+                    <img src="https://iitprivatelimited.com/wp-content/uploads/2016/10/gateway-bank-rwd2.jpg" alt="Gateway Bank" class="rounded-2xl w-full shadow-xl border border-[#F5A623]/30">
+                </div>
+                <div class="animate-on-scroll">
+                    <h2 class="text-3xl font-bold text-center mb-6"><span class="gradient-text-red-gold">::SERVICES OATH OF IDEA INSIDE::</span></h2>
+                    <p class="text-gray-600 leading-relaxed text-justify">Our first and foremost goal is to develop Excellent customer service, which creates loyal customers for life who are willing to refer their business to friends, family, and colleagues. Providing this type of excellent customer service starts with a genuine desire to delight our customers, but we also have to think beyond selling products or services. We always consider the cumulative experience of our customers, have when they visit our store or website, we just put in note their thinking and feeling, and invite all make it better. Let's Make a better Nation.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- New Ideas on Web Section -->
+        <section class="py-16 px-6 bg-gradient-to-r from-[#D92B2B]/5 via-[#F5A623]/10 to-[#D92B2B]/5">
+            <div class="max-w-7xl mx-auto text-center">
+                <h2 class="text-3xl md:text-4xl font-bold mb-6"><span class="gradient-text-red-gold">NEW IDEAS ON WEB</span></h2>
+                <p class="text-gray-600 text-lg max-w-4xl mx-auto">Idea Inside India is an IT Company, Providing professional web services like Responsive Web Designing, Website Development, WordPress Development, Shopping Cart Website/Online Stores with Payment Gateway Integration, Web hosting with Domain registrations, Logo designing, Digital Marketing, Bulk SMS integration, Bulk Emails and Social media Marketing.</p>
+                <p class="text-[#D92B2B] mt-4 font-semibold">We Use Light Speed Cloud Server | SEO & SEM | REAL TIME CHAT SUPPORT | 99.09% UPTIME | FREE* Domain Registrations.</p>
+            </div>
+        </section>
+
+        <!-- Get Started -->
+        <section class="py-12 px-6 text-center">
+            <h2 class="text-3xl font-bold"><span class="gradient-text-red-gold">Get Started</span></h2>
+        </section>
+
+        <!-- Three Services Columns -->
+        <section class="py-12 px-6 max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-3 gap-10">
+                <div class="glass-card p-6 text-center animate-on-scroll">
+                    <img src="https://iitprivatelimited.com/wp-content/uploads/2016/10/domain.png" alt="Domain & Hosting" class="w-32 h-auto mx-auto mb-4">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Domains & Hosting Services</h3>
+                    <p class="text-gray-500 text-justify">Add a domain to carve out your own space on the web. We have valuable Domain Registration partners like Go Daddy, Name Cheap, Big Rock and other leading service providers. For Hosting we use AWS Cloud, Media fire and our own server as well.</p>
+                </div>
+                <div class="glass-card p-6 text-center animate-on-scroll">
+                    <img src="https://iitprivatelimited.com/wp-content/uploads/2016/10/seo.png" alt="SEO Services" class="w-32 h-auto mx-auto mb-4">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Search Engine Optimizer Services</h3>
+                    <p class="text-gray-500 text-justify">Make it easy for new fans to find you with built-in SEO. SEO stands for "search engine optimization." It is the process of getting traffic from "free," "organic" search results. We have on board dynamic professionals and ace marketers.</p>
+                </div>
+                <div class="glass-card p-6 text-center animate-on-scroll">
+                    <img src="https://iitprivatelimited.com/wp-content/uploads/2016/10/analytics.png" alt="Custom App Development" class="w-32 h-auto mx-auto mb-4">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Custom App Development Services</h3>
+                    <p class="text-gray-500 text-justify">We Offer our Clients to Design and Develop their own customized Apps and ERP Modules to maintain their business, rather than to use pre-built applications. This is to act the desired output more particularly.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- We Realize Your Vision -->
+        <section class="py-16 px-6 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold"><span class="gradient-text-red-gold">We Realize Your Vision</span></h2>
+        </section>
+
+        <!-- Footer -->
+        <footer class="bg-[#0A0705] border-t border-[#F5A623]/30 pt-16 pb-8">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="grid md:grid-cols-4 gap-8">
+                    <!-- Quick Links -->
+                    <div>
+                        <h3 class="text-2xl font-bold text-white mb-4">Quick Links</h3>
+                        <ul class="space-y-3 text-gray-400">
+                            <li><a href="#" class="hover:text-[#F5A623] transition flex items-center gap-2"><i class="fa-solid fa-home"></i> Get Home</a></li>
+                            <li><a href="#" class="hover:text-[#F5A623] transition flex items-center gap-2"><i class="fa-solid fa-cogs"></i> Our Services</a></li>
+                            <li><a href="#" class="hover:text-[#F5A623] transition flex items-center gap-2"><i class="fa-solid fa-box"></i> All Products</a></li>
+                            <li><a href="#" class="hover:text-[#F5A623] transition flex items-center gap-2"><i class="fa-solid fa-users"></i> Clients Area</a></li>
+                            <li><a href="#" class="hover:text-[#F5A623] transition flex items-center gap-2"><i class="fa-solid fa-info-circle"></i> Info Cabin</a></li>
+                            <li><a href="#" class="hover:text-[#F5A623] transition flex items-center gap-2"><i class="fa-solid fa-headset"></i> Support Desk</a></li>
+                        </ul>
+                    </div>
+                    <!-- About Us -->
+                    <div>
+                        <h3 class="text-2xl font-bold text-white mb-4">About Us</h3>
+                        <p class="text-gray-400 text-sm">We love our work, yes that's the simplest way to describe why we have been thriving and serving our global clientele with satisfaction in our services. We Believe in togetherness and its our continuous effort to make the things better.</p>
+                        <a href="#" class="text-[#F5A623] hover:text-[#D92B2B] text-sm mt-2 inline-block">Know More..</a>
+                    </div>
+                    <!-- We Ensure -->
+                    <div class="text-center">
+                        <h3 class="text-2xl font-bold text-white mb-4">We Ensure</h3>
+                        <img src="https://iitprivatelimited.com/wp-content/uploads/2016/10/satisfaction_guarantee.png" alt="Satisfaction Guarantee" class="mx-auto mb-3">
+                        <a href="#" class="text-[#F5A623] hover:text-[#D92B2B]">or, Get 100% Cash Back.</a>
+                    </div>
+                    <!-- Follow Us -->
+                    <div class="text-center">
+                        <h3 class="text-2xl font-bold text-white mb-4">Follow Us</h3>
+                        <div class="flex justify-center gap-4 text-3xl">
+                            <a href="#" class="text-gray-400 hover:text-[#D92B2B] transition"><i class="fab fa-facebook"></i></a>
+                            <a href="#" class="text-gray-400 hover:text-[#F5A623] transition"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="text-gray-400 hover:text-[#D92B2B] transition"><i class="fab fa-linkedin"></i></a>
+                            <a href="#" class="text-gray-400 hover:text-[#D92B2B] transition"><i class="fab fa-youtube"></i></a>
+                            <a href="#" class="text-gray-400 hover:text-[#F5A623] transition"><i class="fab fa-github"></i></a>
+                        </div>
+                        <p class="text-gray-500 text-sm mt-4">© Idea Inside India 2007-2025. All Rights Reserved.</p>
+                    </div>
+                </div>
+                <div class="text-center text-gray-500 text-sm pt-8 border-t border-white/10 mt-8">
+                    Powered by WordPress. Theme i-max by TemplatesNext.
+                </div>
+            </div>
+        </footer>
+    </main>
+
+    <!-- WhatsApp Chat Button -->
+    <div class="fixed bottom-6 right-6 z-50">
+        <a href="https://wa.me/919861028010?text=Hi%20!%20There!!%20Nice%20To%20See%20You." target="_blank" class="block">
+            <div class="bg-[#25D366] rounded-full p-3 shadow-lg hover:scale-110 transition duration-300">
+                <i class="fab fa-whatsapp text-white text-3xl"></i>
+            </div>
+        </a>
+    </div>
+
+    <script>
+        // Hero Slider
+        const slides = [
+            { title: "You Want a Website", desc: "Complete Website Design and Development Solutions.", btn: "Get In for a New Idea", bg: "https://iitprivatelimited.com/wp-content/themes/i-max/images/slide1.jpg" },
+            { title: "Easy to use Apps", desc: '"Curiosity is the father of all inventions".', btn: "Know More", bg: "https://iitprivatelimited.com/wp-content/themes/i-max/images/slide2.jpg" },
+            { title: "Needs SEO & SEM Assistances", desc: "WE Provide Digital Assistance service to our Clients understanding their need for various business and management related work.", btn: "Get a Perfect tech Partner", bg: "https://iitprivatelimited.com/wp-content/themes/i-max/images/slide3.jpg" },
+            { title: "Domain & Hosting", desc: "Domain Name Registration and Hosting Solutions with 99.03% Up time user Experience.", btn: "Know More", bg: "https://iitprivatelimited.com/wp-content/themes/i-max/images/slide4.jpg" }
+        ];
+        
+        let currentSlide = 0;
+        let autoInterval;
+        
+        function createSliderContent() {
+            const slide = slides[currentSlide];
+            const sliderContainer = document.getElementById('heroSlider');
+            
+            if (sliderContainer) {
+                sliderContainer.innerHTML = `
+                    <div class="absolute inset-0 transition-opacity duration-700">
+                        <div class="absolute inset-0 bg-gradient-to-r from-black/60 to-black/40 z-10"></div>
+                        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('${slide.bg}');"></div>
+                        <div class="relative z-20 flex flex-col items-center justify-center h-full text-center px-6">
+                            <h2 class="text-4xl md:text-6xl font-bold text-white drop-shadow-lg">${slide.title}</h2>
+                            <p class="text-white/90 text-lg md:text-xl mt-4 drop-shadow-md">${slide.desc}</p>
+                            <button class="btn-primary px-8 py-3 rounded-full text-white font-semibold mt-8 shadow-lg">${slide.btn}</button>
+                        </div>
+                    </div>
+                    <button class="absolute left-4 top-1/2 -translate-y-1/2 z-30 bg-white/20 backdrop-blur rounded-full p-3 hover:bg-white/40 transition text-white" id="sliderPrev"><i class="fa-solid fa-chevron-left"></i></button>
+                    <button class="absolute right-4 top-1/2 -translate-y-1/2 z-30 bg-white/20 backdrop-blur rounded-full p-3 hover:bg-white/40 transition text-white" id="sliderNext"><i class="fa-solid fa-chevron-right"></i></button>
+                    <div class="absolute bottom-6 left-1/2 -translate-x-1/2 z-30 flex gap-2" id="sliderDots">
+                        ${slides.map((_, i) => `<div class="w-3 h-3 rounded-full bg-white/50 cursor-pointer hover:bg-white transition dot ${i === currentSlide ? 'bg-white' : ''}" data-index="${i}"></div>`).join('')}
+                    </div>
+                `;
+                attachEvents();
+            }
+        }
+        
+        function attachEvents() {
+            const prevBtn = document.getElementById('sliderPrev');
+            const nextBtn = document.getElementById('sliderNext');
+            const dots = document.querySelectorAll('.dot');
+            
+            if (prevBtn) {
+                prevBtn.addEventListener('click', () => {
+                    currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+                    createSliderContent();
+                    resetAutoSlide();
+                });
+            }
+            if (nextBtn) {
+                nextBtn.addEventListener('click', () => {
+                    currentSlide = (currentSlide + 1) % slides.length;
+                    createSliderContent();
+                    resetAutoSlide();
+                });
+            }
+            dots.forEach(dot => {
+                dot.addEventListener('click', () => {
+                    currentSlide = parseInt(dot.dataset.index);
+                    createSliderContent();
+                    resetAutoSlide();
+                });
+            });
+        }
+        
+        function resetAutoSlide() {
+            if (autoInterval) clearInterval(autoInterval);
+            autoInterval = setInterval(() => {
+                currentSlide = (currentSlide + 1) % slides.length;
+                createSliderContent();
+            }, 5000);
+        }
+        
+        createSliderContent();
+        resetAutoSlide();
+        
+        // Intersection Observer for scroll animations
+        const animElements = document.querySelectorAll('.animate-on-scroll');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
+        
+        animElements.forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>
