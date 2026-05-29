@@ -11,319 +11,17 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background: #FFFFFF;
-            overflow-x: hidden;
-            color: #1F2937;
-        }
-
-        /* Pearl Red + Golden Yellow theme */
-        :root {
-            --pearl-red: #D92B2B;
-            --pearl-red-dark: #A51C1C;
-            --golden: #F5A623;
-            --golden-dark: #D48A1A;
-            --gray-soft: #F9F9F9;
-        }
-
-        /* header glassmorphism with gold-red borders */
-        .site-header-premium {
-            background: rgba(255, 255, 255, 0.96);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(245, 166, 35, 0.4);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
-        }
-
-        /* HOVER REVEAL FOR TOP HEADER */
-        .top-header-reveal {
-            max-height: 0;
-            opacity: 0;
-            visibility: hidden;
-            overflow: hidden;
-            border-bottom: none;
-            transition: max-height 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1),
-                opacity 0.3s ease,
-                visibility 0.3s ease,
-                padding 0.3s ease,
-                border-width 0.2s ease;
-            transform: translateY(-8px);
-        }
-
-        .navbar-hover-wrapper:hover .top-header-reveal,
-        .site-header-premium:hover .top-header-reveal {
-            max-height: 80px;
-            opacity: 1;
-            visibility: visible;
-            border-bottom-width: 1px;
-            transform: translateY(0);
-            padding-top: 0.25rem;
-            padding-bottom: 0.25rem;
-        }
-
-        .main-header-bar {
-            transition: all 0.2s ease;
-            background: rgba(255, 255, 255, 0.98);
-        }
-
-        /* custom dropdown */
-        .nav-dropdown-courses {
-            position: relative;
-        }
-
-        .dropdown-menu-courses {
-            position: absolute;
-            top: 100%;
-            left: 0;
-            min-width: 240px;
-            background: #FFFFFF;
-            backdrop-filter: blur(0);
-            border-radius: 20px;
-            border: 1px solid rgba(245, 166, 35, 0.4);
-            box-shadow: 0 25px 35px -12px rgba(0, 0, 0, 0.12);
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(12px);
-            transition: all 0.2s ease;
-            z-index: 200;
-        }
-
-        .nav-dropdown-courses:hover .dropdown-menu-courses {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-        }
-
-        .dropdown-item-custom {
-            display: block;
-            padding: 0.7rem 1.5rem;
-            color: #2C3E50;
-            font-weight: 500;
-            font-size: 0.85rem;
-            transition: all 0.2s;
-            border-bottom: 1px solid #FEF3C7;
-        }
-
-        .dropdown-item-custom:last-child {
-            border-bottom: none;
-        }
-
-        .dropdown-item-custom:hover {
-            background: #FEF3C7;
-            color: var(--pearl-red);
-            padding-left: 1.8rem;
-        }
-
-        .btn-gold-outline {
-            border: 1.5px solid var(--golden);
-            background: transparent;
-            transition: 0.2s;
-        }
-
-        .btn-gold-outline:hover {
-            background: var(--golden);
-            color: #1E1B1B;
-            border-color: var(--golden);
-        }
-
-        .btn-red-solid {
-            background: linear-gradient(105deg, #D92B2B, #B91C1C);
-            box-shadow: 0 8px 18px rgba(217, 43, 43, 0.2);
-        }
-
-        .btn-red-solid:hover {
-            background: linear-gradient(105deg, #B91C1C, #991B1B);
-            transform: scale(1.02);
-        }
-
-        .gradient-text-red-gold {
-            background: linear-gradient(135deg, #D92B2B 0%, #F5A623 100%);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        ::-webkit-scrollbar {
-            width: 6px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: #F3F4F6;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: var(--pearl-red);
-            border-radius: 10px;
-        }
-
-        @media (max-width: 1024px) {
-            .top-header-reveal {
-                display: none !important;
-            }
-            .navbar-hover-wrapper:hover .top-header-reveal {
-                display: none !important;
-            }
-        }
-
-        /* Article Styles */
-        .article-content {
-            font-size: 1.05rem;
-            line-height: 1.8;
-            color: #374151;
-        }
-        .article-content h1 {
-            font-size: 2.5rem;
-            font-weight: 800;
-            margin-top: 2rem;
-            margin-bottom: 1rem;
-            color: #1F2937;
-        }
-        .article-content h2 {
-            font-size: 1.8rem;
-            font-weight: 700;
-            margin-top: 1.8rem;
-            margin-bottom: 1rem;
-            color: #1F2937;
-            border-left: 4px solid #D92B2B;
-            padding-left: 1rem;
-        }
-        .article-content h3 {
-            font-size: 1.4rem;
-            font-weight: 600;
-            margin-top: 1.5rem;
-            margin-bottom: 0.75rem;
-            color: #374151;
-        }
-        .article-content h4, .article-content h5, .article-content h6 {
-            font-size: 1.2rem;
-            font-weight: 600;
-            margin-top: 1.2rem;
-            margin-bottom: 0.5rem;
-            color: #D92B2B;
-        }
-        .article-content p {
-            margin-bottom: 1rem;
-        }
-        .article-content ul, .article-content ol {
-            margin: 1rem 0 1rem 2rem;
-        }
-        .article-content li {
-            margin-bottom: 0.5rem;
-        }
-        .article-content table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 1.5rem 0;
-            background: white;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-        }
-        .article-content th {
-            background: linear-gradient(135deg, #D92B2B, #B91C1C);
-            color: white;
-            padding: 12px;
-            text-align: left;
-            font-weight: 600;
-        }
-        .article-content td {
-            padding: 10px 12px;
-            border-bottom: 1px solid #e5e7eb;
-        }
-        .article-content tr:hover {
-            background: #FEF3C7;
-        }
-        .article-content code {
-            background: #FEF3C7;
-            padding: 2px 6px;
-            border-radius: 6px;
-            font-family: monospace;
-            font-size: 0.9em;
-            color: #D92B2B;
-        }
-        .article-content pre {
-            background: #1F2937;
-            color: #e5e7eb;
-            padding: 1rem;
-            border-radius: 12px;
-            overflow-x: auto;
-            margin: 1.5rem 0;
-        }
-        .article-content pre code {
-            background: none;
-            color: #e5e7eb;
-            padding: 0;
-        }
-        .article-content blockquote {
-            border-left: 4px solid #F5A623;
-            background: #FFFBEF;
-            padding: 1rem 1.5rem;
-            margin: 1.5rem 0;
-            border-radius: 8px;
-            font-style: italic;
-        }
-        .article-content .wp-block-image {
-            margin: 1.5rem 0;
-            text-align: center;
-        }
-        .article-content .wp-block-image img {
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            max-width: 100%;
-            height: auto;
-        }
-        .article-content .wp-block-image figcaption {
-            font-size: 0.85rem;
-            color: #6B7280;
-            margin-top: 0.5rem;
-        }
-        .table-wrapper {
-            overflow-x: auto;
-        }
-        .toc {
-            background: #FFFBEF;
-            border: 1px solid #F5A623;
-            border-radius: 16px;
-            padding: 1.5rem;
-            margin-bottom: 2rem;
-        }
-        .toc h3 {
-            margin-top: 0;
-            color: #D92B2B;
-        }
-        .toc ul {
-            margin: 0;
-            list-style: none;
-        }
-        .toc li {
-            margin-bottom: 0.5rem;
-        }
-        .toc a {
-            color: #374151;
-            text-decoration: none;
-            transition: color 0.2s;
-        }
-        .toc a:hover {
-            color: #D92B2B;
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 
-<body class="bg-gradient-to-r from-[#BF953F]/20 via-[#FCF6BA]/20 to-[#B38728]/20 min-h-screen">
+<body class="min-h-screen inline-style-001">
 
     <!-- =================== MASTHEAD : PEARL RED & GOLD HEADER =================== -->
     <div class="navbar-hover-wrapper">
         <header id="masthead" class="site-header-premium fixed top-0 w-full z-50 transition-all duration-200" role="banner">
 
             <!-- TOP HEADER - HIDDEN INITIALLY -->
-            <div class="top-header-reveal bg-white/95 backdrop-blur-sm border-b border-[#F5A623]/20 transition-all duration-300">
+            <div class="top-header-reveal bg-white/95 backdrop-blur-sm border-b border-[#F8B4A3]/20 transition-all duration-300">
                 <div class="max-w-7xl mx-auto px-6 py-1.5 flex items-center justify-between">
                     <div class="flex items-center gap-6">
                         <div class="flex gap-3 text-gray-600">
@@ -350,14 +48,14 @@
             </div>
 
             <!-- MAIN HEADER -->
-            <div class="main-header-bar bg-gradient-to-r from-[#7A0010] via-[#D4AF37] to-[#9E0018] mx-auto px-5 py-3 flex items-center justify-between">
+            <div class="main-header-bar bg-gradient-to-r from-[#29251D] via-[#E31837] to-[#F8B4A3] mx-auto px-5 py-3 flex items-center justify-between">
                 <div class="site-branding flex items-center gap-3">
                     <a class="brand flex items-center" href="index.html">
                         <img width="180" height="60" src="Prajna Inofrmatics.png" class="custom-logo h-10 w-auto"
                             alt="PRAJNA Informatics" decoding="async"
                             onerror="this.onerror=null; this.src='https://placehold.co/180x60?text=PRAJNA+Informatics';">
                     </a>
-                    <span class="hidden md:inline-block text-lg font-medium bg-[#FEF3C7] text-[#D92B2B] px-2 py-0.5 rounded-full">PRAJNA Informatics</span>
+                    <span class="hidden md:inline-block text-lg font-medium bg-[#FDE6E0] text-[#D92B2B] px-2 py-0.5 rounded-full">PRAJNA Informatics</span>
                 </div>
 
                 <nav id="site-navigation" class="hidden lg:block" aria-label="Primary">
@@ -390,9 +88,9 @@
             </div>
 
             <!-- Mobile Drawer -->
-            <div id="mobileDrawer" class="fixed inset-0 bg-white z-50 transform translate-x-full transition-transform duration-300 ease-in-out lg:hidden"
-                style="box-shadow: -5px 0 30px rgba(0,0,0,0.1);">
-                <div class="flex justify-between items-center p-5 border-b border-[#F5A623]/30">
+            <div id="mobileDrawer" class="fixed inset-0 bg-white z-50 transform translate-x-full transition-transform duration-300 ease-in-out lg:hidden inline-style-002"
+               >
+                <div class="flex justify-between items-center p-5 border-b border-[#F8B4A3]/30">
                     <img src="https://i0.wp.com/thesli.in/wp-content/uploads/2022/07/cropped-cropped-sli-right-align.png?fit=563%2C189&ssl=1" class="h-8 w-auto" alt="logo">
                     <button id="closeDrawer" class="text-2xl text-gray-600"><i class="fa-solid fa-xmark"></i></button>
                 </div>
@@ -424,7 +122,7 @@
     <main class="max-w-5xl mx-auto px-6 py-12">
         <!-- Article Header -->
         <div class="text-center mb-10">
-            <div class="inline-flex items-center gap-2 bg-[#FEF3C7] rounded-full px-4 py-1.5 text-sm border border-[#F5A623]/40 mb-4">
+            <div class="inline-flex items-center gap-2 bg-[#FDE6E0] rounded-full px-4 py-1.5 text-sm border border-[#F8B4A3]/40 mb-4">
                 <i class="fa-brands fa-android text-[#D92B2B]"></i> Mobile Development
             </div>
             <h1 class="text-4xl md:text-5xl font-extrabold text-gray-800 mb-4">Android <span class="gradient-text-red-gold">OS</span></h1>
@@ -437,7 +135,7 @@
 
         <!-- Featured Image -->
         <div class="mb-10 text-center">
-            <img src="https://i0.wp.com/thesli.in/wp-content/uploads/2023/07/ANDROID-OS.jpg?fit=430%2C460&ssl=1" alt="Android OS Development" class="rounded-2xl shadow-lg mx-auto border border-[#F5A623]/30" style="max-width: 300px;">
+            <img src="https://i0.wp.com/thesli.in/wp-content/uploads/2023/07/ANDROID-OS.jpg?fit=430%2C460&ssl=1" alt="Android OS Development" class="rounded-2xl shadow-lg mx-auto border border-[#F8B4A3]/30 inline-style-006">
             <p class="text-gray-500 text-sm mt-3">Course on Android OS development</p>
         </div>
 
@@ -445,18 +143,18 @@
         <div class="toc">
             <h3 class="text-xl font-bold"><i class="fa-regular fa-list mr-2 text-[#D92B2B]"></i> Table of Contents</h3>
             <ul class="grid md:grid-cols-2 gap-2 mt-4">
-                <li><a href="#chapter1"><i class="fa-regular fa-file-lines mr-2 text-[#F5A623]"></i> Chapter 1: What is Android?</a></li>
-                <li><a href="#chapter2"><i class="fa-regular fa-file-lines mr-2 text-[#F5A623]"></i> Chapter 2: Downloading and Installing Eclipse</a></li>
-                <li><a href="#chapter3"><i class="fa-regular fa-file-lines mr-2 text-[#F5A623]"></i> Chapter 3: Downloading and Installing the Android SDK</a></li>
-                <li><a href="#chapter4"><i class="fa-regular fa-file-lines mr-2 text-[#F5A623]"></i> Chapter 4: Exploring the Android SDK</a></li>
-                <li><a href="#chapter5"><i class="fa-regular fa-file-lines mr-2 text-[#F5A623]"></i> Chapter 5: Application: Hello World!</a></li>
-                <li><a href="#chapter6"><i class="fa-regular fa-file-lines mr-2 text-[#F5A623]"></i> Chapter 6: Using the Command-Line Tools</a></li>
-                <li><a href="#chapter7"><i class="fa-regular fa-file-lines mr-2 text-[#F5A623]"></i> Chapter 7: Using Intents and the Phone Dialer</a></li>
-                <li><a href="#chapter8"><i class="fa-regular fa-file-lines mr-2 text-[#F5A623]"></i> Chapter 8: Lists, Menus, And Other Views</a></li>
-                <li><a href="#chapter9"><i class="fa-regular fa-file-lines mr-2 text-[#F5A623]"></i> Chapter 9: Using the Cell Phone's GPS Functionality</a></li>
-                <li><a href="#chapter10"><i class="fa-regular fa-file-lines mr-2 text-[#F5A623]"></i> Chapter 10: Using the Google API with GTalk</a></li>
-                <li><a href="#chapter11"><i class="fa-regular fa-file-lines mr-2 text-[#F5A623]"></i> Chapter 11: Application: Find a Friend</a></li>
-                <li><a href="#chapter12"><i class="fa-regular fa-file-lines mr-2 text-[#F5A623]"></i> Chapter 12: Android SDK Tool Reference</a></li>
+                <li><a href="#chapter1"><i class="fa-regular fa-file-lines mr-2 text-[#F8B4A3]"></i> Chapter 1: What is Android?</a></li>
+                <li><a href="#chapter2"><i class="fa-regular fa-file-lines mr-2 text-[#F8B4A3]"></i> Chapter 2: Downloading and Installing Eclipse</a></li>
+                <li><a href="#chapter3"><i class="fa-regular fa-file-lines mr-2 text-[#F8B4A3]"></i> Chapter 3: Downloading and Installing the Android SDK</a></li>
+                <li><a href="#chapter4"><i class="fa-regular fa-file-lines mr-2 text-[#F8B4A3]"></i> Chapter 4: Exploring the Android SDK</a></li>
+                <li><a href="#chapter5"><i class="fa-regular fa-file-lines mr-2 text-[#F8B4A3]"></i> Chapter 5: Application: Hello World!</a></li>
+                <li><a href="#chapter6"><i class="fa-regular fa-file-lines mr-2 text-[#F8B4A3]"></i> Chapter 6: Using the Command-Line Tools</a></li>
+                <li><a href="#chapter7"><i class="fa-regular fa-file-lines mr-2 text-[#F8B4A3]"></i> Chapter 7: Using Intents and the Phone Dialer</a></li>
+                <li><a href="#chapter8"><i class="fa-regular fa-file-lines mr-2 text-[#F8B4A3]"></i> Chapter 8: Lists, Menus, And Other Views</a></li>
+                <li><a href="#chapter9"><i class="fa-regular fa-file-lines mr-2 text-[#F8B4A3]"></i> Chapter 9: Using the Cell Phone's GPS Functionality</a></li>
+                <li><a href="#chapter10"><i class="fa-regular fa-file-lines mr-2 text-[#F8B4A3]"></i> Chapter 10: Using the Google API with GTalk</a></li>
+                <li><a href="#chapter11"><i class="fa-regular fa-file-lines mr-2 text-[#F8B4A3]"></i> Chapter 11: Application: Find a Friend</a></li>
+                <li><a href="#chapter12"><i class="fa-regular fa-file-lines mr-2 text-[#F8B4A3]"></i> Chapter 12: Android SDK Tool Reference</a></li>
             </ul>
         </div>
 
@@ -711,7 +409,7 @@ startActivity(callIntent);</code></pre>
         </article>
 
         <!-- Author Bio -->
-        <div class="mt-12 p-6 bg-[#FFFBEF] rounded-2xl border border-[#F5A623]/30">
+        <div class="mt-12 p-6 bg-[#FFF8F0] rounded-2xl border border-[#F8B4A3]/30">
             <div class="flex items-center gap-4">
                 <img src="https://secure.gravatar.com/avatar/847d9b3265aad2ef61ed1914da97b18f383061d8d68d8d5d22b11b96f5baa33f?s=96&d=mm&r=g" alt="Author" class="w-16 h-16 rounded-full border-2 border-[#D92B2B]">
                 <div>
@@ -737,7 +435,7 @@ startActivity(callIntent);</code></pre>
     </main>
 
     <!-- Footer -->
-    <footer class="bg-[#0A0705] border-t border-[#F5A623]/30 pt-16 pb-8 mt-12 text-gray-300">
+    <footer class="bg-[#0A0705] border-t border-[#F8B4A3]/30 pt-16 pb-8 mt-12 text-gray-300 inline-style-003">
         <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-4 gap-8">
             <div>
                 <img src="Prajna Inofrmatics.png" alt="Prajna Informatics" class="w-32 h-20 mb-3" onerror="this.style.display='none'">
@@ -746,9 +444,9 @@ startActivity(callIntent);</code></pre>
             <div>
                 <h4 class="font-semibold text-white mb-3">Important Links</h4>
                 <ul class="space-y-1 text-sm">
-                    <li><a href="#" class="hover:text-[#F5A623] transition">Our Team</a></li>
-                    <li><a href="#" class="hover:text-[#F5A623] transition">Leadership</a></li>
-                    <li><a href="#" class="hover:text-[#F5A623] transition">Careers</a></li>
+                    <li><a href="#" class="hover:text-[#F8B4A3] transition">Our Team</a></li>
+                    <li><a href="#" class="hover:text-[#F8B4A3] transition">Leadership</a></li>
+                    <li><a href="#" class="hover:text-[#F8B4A3] transition">Careers</a></li>
                 </ul>
             </div>
             <div>
@@ -762,10 +460,10 @@ startActivity(callIntent);</code></pre>
             <div>
                 <h4 class="font-semibold text-white mb-3">Get In Touch</h4>
                 <p class="text-sm">Jagannath Nagar, Rasulgarh, Bhubaneswar, 751010</p>
-                <p class="mt-2 text-[#F5A623]">info@thesli.com</p>
+                <p class="mt-2 text-[#F8B4A3]">info@thesli.com</p>
                 <div class="flex gap-4 mt-4 text-xl">
-                    <i class="fab fa-facebook hover:text-[#F5A623] cursor-pointer transition"></i>
-                    <i class="fab fa-twitter hover:text-[#F5A623] cursor-pointer transition"></i>
+                    <i class="fab fa-facebook hover:text-[#F8B4A3] cursor-pointer transition"></i>
+                    <i class="fab fa-twitter hover:text-[#F8B4A3] cursor-pointer transition"></i>
                     <i class="fab fa-instagram hover:text-[#D92B2B] cursor-pointer transition"></i>
                 </div>
             </div>
